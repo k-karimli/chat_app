@@ -13,6 +13,15 @@ if not firebase_admin._apps:
         'databaseURL': DATABASE_URL
     })
 
+# Set Firebase rules
+rules_ref = db.reference('.settings/rules')
+rules_ref.set({
+    "rules": {
+        ".read": True,
+        ".write": True
+    }
+})
+
 st.title("Streamlit Chat App")
 
 # User registration/login
