@@ -4,11 +4,17 @@ from firebase_admin import credentials, db
 
 # Initialize Firebase
 
-# Initialize Firebase with service account key
-SERVICE_ACCOUNT_PATH = '/home/hp/ufaz_25/programing/python_25/chat-app-7f2b4-firebase-adminsdk-fbsvc-2d6062c353.json'
+
+# Initialize Firebase with service account key (supports Streamlit Cloud secrets)
+import json
 DATABASE_URL = 'https://chat-app-7f2b4-default-rtdb.firebaseio.com/'
 if not firebase_admin._apps:
-    cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
+    if "FIREBASE_KEY_JSON" in st.secrets:
+        firebase_key = json.loads(st.secrets["/home/hp/ufaz_25/programing/python_25/chat-app-7f2b4-firebase-adminsdk-fbsvc-eb2a626975.json"])
+        cred = credentials.Certificate(firebase_key)
+    else:
+        SERVICE_ACCOUNT_PATH = '/home/hp/ufaz_25/programing/python_25/chat-app-7f2b4-firebase-adminsdk-fbsvc-2d6062c353.json'
+        cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
     firebase_admin.initialize_app(cred, {
         'databaseURL': DATABASE_URL
     })
@@ -45,5 +51,3 @@ if 'username' in st.session_state:
                (msg['from'] == chat_with and msg['to'] == st.session_state['username']):
                 sender = "You" if msg['from'] == st.session_state['username'] else chat_with
                 st.write(f"{sender}: {msg['message']}")
-
-
