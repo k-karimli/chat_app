@@ -5,22 +5,13 @@ from firebase_admin import credentials, db
 # Initialize Firebase
 
 # Initialize Firebase with service account key
-SERVICE_ACCOUNT_PATH = 'user.json'
+SERVICE_ACCOUNT_PATH = '/workspaces/chat_app/chat-app-7f2b4-firebase-adminsdk-fbsvc-2d6062c353.json'
 DATABASE_URL = 'https://chat-app-7f2b4-default-rtdb.firebaseio.com/'
 if not firebase_admin._apps:
     cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
     firebase_admin.initialize_app(cred, {
         'databaseURL': DATABASE_URL
     })
-
-# Set Firebase rules
-rules_ref = db.reference('.settings/rules')
-rules_ref.set({
-    "rules": {
-        ".read": True,
-        ".write": True
-    }
-})
 
 st.title("Streamlit Chat App")
 
