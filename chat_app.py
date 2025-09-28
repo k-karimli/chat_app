@@ -5,7 +5,7 @@ from firebase_admin import credentials, db
 # Initialize Firebase
 
 # Initialize Firebase with service account key
-SERVICE_ACCOUNT_PATH = '/workspaces/chat_app/chat-app-7f2b4-firebase-adminsdk-fbsvc-2d6062c353.json'
+SERVICE_ACCOUNT_PATH = 'user.json'
 DATABASE_URL = 'https://chat-app-7f2b4-default-rtdb.firebaseio.com/'
 if not firebase_admin._apps:
     cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
