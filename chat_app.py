@@ -40,3 +40,4 @@ if 'username' in st.session_state:
     messages = db.collection('messages').where('from', '==', chat_with).where('to', '==', st.session_state['username']).stream()
     for msg in messages:
         st.write(f"{chat_with}: {msg.to_dict()['message']}")
+
